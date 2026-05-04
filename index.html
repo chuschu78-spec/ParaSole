@@ -1,1 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Sole ❤️🌻</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --amarillo-girasol: #FFD700;
+    --marron-tierra: #5D4037;
+    --blanco-crema: rgba(255, 250, 240, 0.9);
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+    background-size: cover;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255,215,0,0.15), rgba(255,255,255,0.2));
+    z-index: -1;
+}
+
+#pantalla-verificacion {
+    background: white;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    text-align: center;
+    max-width: 320px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    border: 3px solid var(--amarillo-girasol);
+}
+
+.titulo-principal {
+    font-family: 'Great Vibes', cursive;
+    font-size: 45px;
+    color: var(--marron-tierra);
+    margin-bottom: 10px;
+}
+
+.input-fecha {
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 18px;
+    border: 2px solid var(--amarillo-girasol);
+    border-radius: 12px;
+    text-align: center;
+    width: 85%;
+    outline: none;
+}
+
+.btn-verificar {
+    margin-top: 20px;
+    background: var(--amarillo-girasol);
+    color: var(--marron-tierra);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: transform 0.2s;
+}
+
+.btn-verificar:hover { transform: scale(1.05); }
+
+#contenido-principal {
+    display: none;
+    max-width: 750px;
+    margin: auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 60px;
+    color: white;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.6);
+    margin-bottom: 30px;
+}
+
+.texto-animado {
+    font-size: 20px;
+    color: #2c3e50;
+    line-height: 1.9;
+    background: var(--blanco-crema);
+    padding: 40px;
+    border-radius: 30px;
+    border-right: 10px solid var(--amarillo-girasol);
+    text-align: left;
+    font-style: italic;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    min-height: 200px;
+}
+
+.letra {
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* NUEVO BOTÓN */
+.btn-lista {
+    margin-top: 25px;
+    background: var(--amarillo-girasol);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-lista:hover {
+    transform: scale(1.05);
+}
+
+/* LISTA */
+.lista-cosas {
+    display: none;
+    margin-top: 20px;
+    background: rgba(255,255,255,0.9);
+    padding: 20px;
+    border-radius: 20px;
+    text-align: left;
+    animation: fadeIn 0.5s ease;
+}
+
+.contenedor-gatitos {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.gif-gatito {
+    width: 280px;
+    border-radius: 20px;
+    border: 6px solid white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+#monito-caminante {
+    position: fixed;
+    bottom: 20px;
+    left: -100px;
+    font-size: 55px;
+    z-index: 9999;
+    pointer-events: none;
+    display: none;
+}
+
+.heart-particle { 
+    position: fixed; 
+    pointer-events: none; 
+    z-index: 9999; 
+    font-size: 22px;
+    filter: drop-shadow(0 0 6px gold);
+}
+
+@keyframes explode {
+    0% { transform: translate(0,0) scale(1); opacity:1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity:0; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="pantalla-verificacion">
+    <div class="titulo-principal">Para Sole ❤️</div>
+    <div style="color: #666; font-size: 14px;">Nuestra Fecha Especial</div>
+    <input type="tel" id="fechaInput" class="input-fecha" placeholder="DDMMYYYY" maxlength="8">
+    <button class="btn-verificar" onclick="verificarFecha()">Abrir mi corazón 🌻</button>
+    <p id="error" style="color:red; display:none; margin-top:10px;">Esa no es la fecha... 🥺</p>
+</div>
+
+<div id="contenido-principal">
+    <h1>Para Sole, mi monita 🌻❤️</h1>
+    
+    <div id="textoCarta" class="texto-animado"></div>
+
+    <!-- BOTÓN Y LISTA (AGREGADO CORRECTAMENTE) -->
+    <button class="btn-lista" onclick="toggleLista()">💛 Cosas que me gustan de ti 💛</button>
+
+    <div id="lista" class="lista-cosas">
+        <p>🌻 Tus ojos verdes cuando les da el sol.</p>
+        <p>💫 Cómo me miras cuando no me doy cuenta.</p>
+        <p>✨ El brillo de tu mirada cuando estás feliz.</p>
+        <p>💛 Tus rulos rebeldes.</p>
+        <p>🌻 El volumen de tu cabello cuando te despiertas.</p>
+        <p>😊 La forma de tu cara.</p>
+        <p>💗 Tus mejillas cuando te sonrojas.</p>
+        <p>🌼 Tu piel siempre suave.</p>
+        <p>😁 Tu sonrisa perfecta.</p>
+        <p>😂 Cómo se te achinan los ojos al reírte.</p>
+        <p>🎶 El sonido de tu risa.</p>
+        <p>💋 Tus labios cuando me sonríes de lado.</p>
+        <p>🌙 El tono de tu voz al despertarte.</p>
+        <p>❤️ Cómo suena mi nombre cuando lo dices tú.</p>
+        <p>🤫 Tus susurros.</p>
+        <p>🕊️ Tu paz al hablar.</p>
+        <p>🔥 Tu personalidad tan fuerte.</p>
+        <p>🧠 Lo inteligente que eres.</p>
+        <p>🚶‍♀️ Tu seguridad al caminar.</p>
+        <p>🤣 Tu sentido del humor.</p>
+        <p>🎯 Lo decidida que eres con lo que quieres.</p>
+        <p>😜 Tu inmadurez, que me da años de vida.</p>
+        <p>🌈 Lo auténtica que eres siempre.</p>
+        <p>🍯 Tu lado dulce que pocos conocen.</p>
+        <p>👂 Cómo me escuchas.</p>
+        <p>⏳ La paciencia que me tienes.</p>
+        <p>🫶 Cómo me cuidas cuando estoy mal.</p>
+        <p>🤗 Tus abrazos que me reinician.</p>
+        <p>💖 La forma en que me haces sentir único.</p>
+        <p>🌻 Que siempre estás para mí.</p>
+        <p>🛡️ Tu apoyo incondicional.</p>
+        <p>🎁 Lo detallista que eres.</p>
+        <p>🥰 Cómo me mimas sin que te lo pida.</p>
+        <p>🙏 Tu respeto hacia mí.</p>
+        <p>🔐 La confianza que me das.</p>
+        <p>🌸 Tu olor, que se me queda grabado.</p>
+        <p>🚶‍♀️ Tu forma de caminar hacia mí.</p>
+        <p>🤝 Cómo me tomas de la mano.</p>
+        <p>😠 Tu cara de odio cuando bromeo con mi ex.</p>
+        <p>🧠 Tus argumentos para callarme cuando hago bromas tontas.</p>
+        <p>😏 Lo mucho que me gusta que te pongas celosa.</p>
+        <p>🎙️ Ese tono de voz serio cuando me reclamas.</p>
+        <p>⚔️ Tus ganas de ganarme en cualquier discusión.</p>
+        <p>🔥 La mirada de fuego que me lanzas por mis chistes.</p>
+        <p>🥺 Lo tierna que te ves cuando intentas estar enojada.</p>
+        <p>💬 Que me discutas todo porque te importo.</p>
+        <p>🧱 Cómo me pones límites con carácter.</p>
+        <p>🛡️ Tus ganas de defendernos siempre.</p>
+        <p>✨ Esa chispita que sale de tus ojos verdes cuando me peleas.</p>
+        <p>💞 Lo rápido que me perdonas después de un berrinche.</p>
+        <p>🎇 Tu capacidad para sorprenderme cada día.</p>
+        <p>👨‍👩‍👧 La forma en que te preocupas por mi familia.</p>
+        <p>👗 Cómo te queda cualquier ropa que te pongas.</p>
+        <p>💪 Tu fuerza para salir adelante siempre.</p>
+        <p>😂 Y miles de cosas más pero no hay tanto espacio JAJAJA</p>
+    </div>
+
+    <div class="contenedor-gatitos">
+        <img class="gif-gatito" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Gatito tierno">
+    </div>
+
+    <div style="font-family:'Great Vibes'; font-size:45px; color:white; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); padding-bottom:80px;">
+        Eres mi todo. ❤️🌻
+    </div>
+</div>
+
+<div id="monito-caminante">🐒</div>
+
+<script>
+function toggleLista(){
+    const lista = document.getElementById("lista");
+    lista.style.display = (lista.style.display === "block") ? "none" : "block";
+}
+</script>
+
+<script>
+// TU SCRIPT ORIGINAL (NO TOCADO)
+const mensaje = `Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú; es como si la vida me hubiera dado el regalo más grande del mundo sin que yo hiciera nada para merecerlo.
+
+No tienes idea de lo mucho que me fascina todo de ti. Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve loco. Y aunque sé que a veces hay cosas de tu físico que te hacen dudar o que te generan inseguridad, quiero que sepas que me he propuesto como meta que algún día te veas a través de mis ojos. Voy a estar ahí para recordarte lo hermosa que eres, para abrazar cada parte de ti que no te convenza y ayudarte a superar esos miedos, porque para mí eres perfecta tal cual eres.
+
+A veces siento que ni tú misma te das cuenta de lo increíble que eres. No pienso soltarte nunca; mi único plan es construir una vida entera contigo, cumpliendo sueños de la mano y apoyándote en todo. Ahora mismo te extraño tanto que duele. Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites. No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, y de llenarte la frente de besos mientras te susurro cuánto te amo. Cuento los minutos para volver a tenerte cerca. Eres mi todo.`;
+
+function escribirTexto() {
+    const cont = document.getElementById("textoCarta");
+    let index = 0;
+
+    function procesar() {
+        if (index < mensaje.length) {
+            const span = document.createElement("span");
+            span.className = "letra";
+            span.innerHTML = mensaje[index] === "\n" ? "<br>" : mensaje[index];
+            cont.appendChild(span);
+
+            index++;
+
+            let velocidad = 25;
+            if (mensaje[index] === "." || mensaje[index] === ",") velocidad = 180;
+            if (mensaje[index] === "\n") velocidad = 300;
+
+            setTimeout(procesar, velocidad);
+        }
+    }
+    procesar();
+}
+
+function verificarFecha() {
+    const input = document.getElementById('fechaInput').value;
+
+    if (input === "13032026") {
+        document.getElementById('pantalla-verificacion').style.display = "none";
+        document.getElementById('contenido-principal').style.display = "block";
+        document.getElementById('monito-caminante').style.display = "block";
+
+        escribirTexto();
+        iniciarMonito();
+    } else {
+        document.getElementById('error').style.display = "block";
+    }
+}
+
+function iniciarMonito() {
+    const mono = document.getElementById("monito-caminante");
+    let x = -100;
+    let vel = 2;
+
+    function animar() {
+        x += vel;
+        mono.style.left = x + "px";
+        if (x > window.innerWidth - 60 || x < -50) {
+            vel *= -1;
+            mono.style.transform = vel > 0 ? "scaleX(1)" : "scaleX(-1)";
+        }
+        requestAnimationFrame(animar);
+    }
+    animar();
+}
+
+document.addEventListener("click", function(e){
+    for (let i = 0; i < 8; i++) {
+        const p = document.createElement('div');
+        p.classList.add('heart-particle');
+        p.innerHTML = "🌻";
+        p.style.left = e.clientX + 'px';
+        p.style.top = e.clientY + 'px';
+        const tx = (Math.random() - 0.5) * 200;
+        const ty = (Math.random() - 0.5) * 200;
+        p.style.setProperty('--tx', tx + "px");
+        p.style.setProperty('--ty', ty + "px");
+        p.style.animation = "explode 0.8s forwards";
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 800);
+    }
+});
+</script>
+
+</body>
+</html>
