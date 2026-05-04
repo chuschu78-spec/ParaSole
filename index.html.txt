@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Sole ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fff3b0, #ffd6e0);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 48px;
+    color: #ff4d6d;
+}
+
+.texto {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+    background: rgba(255,255,255,0.7);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+/* corazones flotando */
+.corazon {
+    position: fixed;
+    color: red;
+    animation: flotar 6s linear infinite;
+    font-size: 20px;
+}
+
+@keyframes flotar {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* girasoles */
+.girasol {
+    position: fixed;
+    width: 40px;
+    animation: girar 10s linear infinite;
+}
+
+@keyframes girar {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Para Sole, mi monita 🌻❤️</h1>
+
+    <div class="texto">
+        Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. 
+        A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú; es como si la vida me hubiera dado el regalo más grande del mundo sin que yo hiciera nada para merecerlo.<br><br>
+
+        No tienes idea de lo mucho que me fascina todo de ti. Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve loco. 
+        Y aunque sé que a veces hay cosas de tu físico que te hacen dudar o que te generan inseguridad, quiero que sepas que me he propuesto como meta que algún día te veas a través de mis ojos. 
+        Voy a estar ahí para recordarte lo hermosa que eres, para abrazar cada parte de ti que no te convenza y ayudarte a superar esos miedos, porque para mí eres perfecta tal cual eres.<br><br>
+
+        A veces siento que ni tú misma te das cuenta de lo increíble que eres. 
+        No pienso soltarte nunca; mi único plan es construir una vida entera contigo, cumpliendo sueños de la mano y apoyándote en todo. 
+        Ahora mismo te extraño tanto que duele. Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites.<br><br>
+
+        No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, y de llenarte la frente de besos mientras te susurro cuánto te amo. 
+        Cuento los minutos para volver a tenerte cerca.<br><br>
+
+        <b>Eres mi todo. ❤️🌻</b>
+    </div>
+</div>
+
+<script>
+// corazones
+function crearCorazon() {
+    const corazon = document.createElement("div");
+    corazon.classList.add("corazon");
+    corazon.innerHTML = "❤️";
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.fontSize = (Math.random() * 20 + 10) + "px";
+    document.body.appendChild(corazon);
+
+    setTimeout(() => {
+        corazon.remove();
+    }, 6000);
+}
+setInterval(crearCorazon, 300);
+
+// girasoles
+function crearGirasol() {
+    const girasol = document.createElement("img");
+    girasol.src = "https://cdn-icons-png.flaticon.com/512/2909/2909760.png";
+    girasol.classList.add("girasol");
+    girasol.style.left = Math.random() * 100 + "vw";
+    girasol.style.top = Math.random() * 100 + "vh";
+    document.body.appendChild(girasol);
+
+    setTimeout(() => {
+        girasol.remove();
+    }, 10000);
+}
+setInterval(crearGirasol, 800);
+</script>
+
+</body>
+</html>
