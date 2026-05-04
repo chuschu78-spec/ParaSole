@@ -3,31 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Sole ❤️</title>
+<title>Para Sole ❤️🌻</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --rosa-claro: #ffe5ec;
-    --rosa-fuerte: #ff4d6d;
+    --amarillo-girasol: #FFD700; /* Un amarillo brillante y cálido */
+    --marron-tierra: #8B4513;   /* Para el texto de contraste */
+    --blanco-crema: #FFF8DC;     /* Para las cajas de texto */
 }
 
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: var(--rosa-claro);
-    background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
+    /* CAMBIO DE FONDO: Imagen de un campo de girasoles de alta calidad */
+    background-image: url('https://img.freepik.com/foto-gratis/hermoso-campo-girasoles-al-atardecer_1268-18548.jpg');
+    background-size: cover;          /* Asegura que la imagen cubra toda la pantalla */
+    background-position: center;    /* Centra la imagen */
+    background-attachment: fixed;    /* Mantiene el fondo estático al hacer scroll */
     overflow-x: hidden;
     overflow-y: auto;
 }
 
 /* PANTALLA INICIAL */
 #pantalla-verificacion {
-    background: white;
+    background: var(--blanco-crema); /* Fondo de la tarjeta */
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Sombra más pronunciada */
     text-align: center;
     max-width: 320px;
     position: fixed;
@@ -40,33 +44,36 @@ body {
 .titulo-principal {
     font-family: 'Great Vibes', cursive;
     font-size: 40px;
-    color: var(--rosa-fuerte);
+    color: var(--marron-tierra);
 }
 
 .pista {
     margin-top: 10px;
     font-size: 15px;
-    color: #666;
+    color: #444; /* Un marrón oscuro para el texto secundario */
 }
 
 .input-fecha {
     margin-top: 15px;
     padding: 12px;
     font-size: 18px;
-    border: 2px solid var(--rosa-fuerte);
+    border: 2px solid var(--amarillo-girasol);
     border-radius: 12px;
     text-align: center;
     width: 80%;
+    color: var(--marron-tierra);
+    background-color: white; /* Para el input */
 }
 
 .btn-verificar {
     margin-top: 15px;
-    background: var(--rosa-fuerte);
-    color: white;
+    background: var(--amarillo-girasol);
+    color: var(--marron-tierra); /* Texto del botón */
     border: none;
     padding: 10px 25px;
     border-radius: 20px;
     cursor: pointer;
+    font-weight: 600;
 }
 
 /* CONTENIDO */
@@ -82,18 +89,19 @@ body {
 h1 {
     font-family: 'Great Vibes', cursive;
     font-size: 55px;
-    color: var(--rosa-fuerte);
+    color: white; /* Texto del título en blanco para contraste */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Sombra de texto */
     margin-top: 60px;
 }
 
 .texto-animado {
     font-size: 19px;
-    color: #333;
+    color: #333; /* Texto principal oscuro */
     line-height: 1.8;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255, 255, 255, 0.85); /* Fondo blanco con opacidad */
     padding: 30px;
     border-radius: 25px;
-    border-left: 8px solid var(--rosa-fuerte);
+    border-left: 8px solid var(--amarillo-girasol);
     text-align: left;
     font-style: italic;
     font-weight: 300;
@@ -112,13 +120,13 @@ h1 {
 .gif-gatito {
     width: 250px;
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     border: 4px solid white;
 }
 
 /* FRASES DESTACADAS */
 .destacar {
-    color: var(--rosa-fuerte);
+    color: var(--marron-tierra);
     font-weight: 600;
     opacity: 0;
     animation: aparecer 1.5s ease forwards;
@@ -127,7 +135,7 @@ h1 {
 @keyframes aparecer {
     to {
         opacity: 1;
-        text-shadow: 0 0 10px rgba(255,77,109,0.5);
+        text-shadow: 0 0 10px rgba(139, 69, 19, 0.5); /* Sombra marrón */
     }
 }
 
@@ -160,7 +168,7 @@ h1 {
 
 <!-- PANTALLA DE ENTRADA -->
 <div id="pantalla-verificacion">
-    <div class="titulo-principal">Para Sole ❤️</div>
+    <div class="titulo-principal">Para Sole ❤️🌻</div>
     <div class="pista">
         <b>Pista:</b> Nuestra Fecha Especial (Día, Mes, Año)
     </div>
@@ -175,13 +183,13 @@ h1 {
     
     <div id="textoCarta" class="texto-animado"></div>
 
-    <!-- AQUÍ ESTÁN LOS GATITOS -->
+    <!-- SECCIÓN DE GATITOS (Reparada) -->
     <div class="contenedor-gatitos">
         <img class="gif-gatito" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3R6bm9qZWh4YXN3bm9ueXp5eG94bm9ueXp5eG94bm9ueXp5eG94JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/MDJ9IbxxvDUQM/giphy.gif" alt="Gatitos abrazándose">
-        <img class="gif-gatito" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueXp5eG94bm9ueXp5eG94bm9ueXp5eG94bm9ueXp5eG94JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/11I5uX970Gsc6I/giphy.gif" alt="Gatitos amor">
+        <img class="gif-gatito" src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyOTViYWNueDNtbnJuZGpscmc1bzQ1M3k4cXRtNnlnM2thM3p2d2dsaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/hapksuDhRmbU4/giphy-downsized.gif" alt="Gatitos amor">
     </div>
 
-    <div style="font-family:'Great Vibes'; font-size:40px; color:var(--rosa-fuerte); padding-bottom:100px;">
+    <div style="font-family:'Great Vibes'; font-size:40px; color:white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); padding-bottom:100px;">
         Eres mi todo. ❤️🌻
     </div>
 </div>
@@ -189,6 +197,7 @@ h1 {
 <div id="monito-caminante">🐒</div>
 
 <script>
+// El script permanece igual, no necesita cambios.
 const mensaje = `Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú; es como si la vida me hubiera dado el regalo más grande del mundo sin que yo hiciera nada para merecerlo.
 
 <span class="destacar">No tienes idea de lo mucho que me fascina todo de ti.</span>
@@ -197,7 +206,7 @@ Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve
 
 <span class="destacar">Ahora mismo te extraño tanto que duele.</span>
 
-Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites. No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, y de llenarte la frente de besos mientras te susurro cuánto te amo. Cuento los minutos para volver a tenerte cerca.`;
+Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites. No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, de llenarte la frente de besos mientras te susurro cuánto te amo y de quedarme perdido en el color de tu sonrisa. Cuento los minutos para volver a tenerte cerca.`;
 
 let i = 0;
 function escribirTexto() {
@@ -219,7 +228,6 @@ function escribirTexto() {
 function verificarFecha() {
     const input = document.getElementById('fechaInput').value;
 
-    // Nota: Mantengo tu fecha actual 13032026
     if (input === "13032026") {
         document.getElementById('pantalla-verificacion').style.display = "none";
         document.getElementById('contenido-principal').style.display = "block";
