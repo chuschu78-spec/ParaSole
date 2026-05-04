@@ -2,218 +2,195 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Sole ❤️</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para mi monita ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
     <style>
+        * { box-sizing: border-box; }
+        
         body {
             margin: 0;
+            padding: 0;
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #ffd6e0, #fff3b0);
+            background-color: #ffeef2;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            user-select: none; /* Evita que se seleccione el texto al hacer click rápido */
+            min-height: 100vh;
+            overflow: hidden; /* Evita scroll fuera de la carta */
         }
 
-        /* BLOQUEO */
-        #bloqueo {
+        /* Pantalla de inicio */
+        #pantalla-bloqueo {
             text-align: center;
-            max-width: 300px;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.6);
             padding: 20px;
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
+            z-index: 10;
+            transition: opacity 0.5s ease;
+        }
+
+        .caja-login {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.2);
         }
 
         h2 {
             font-family: 'Great Vibes', cursive;
             color: #ff4d6d;
             font-size: 2.5rem;
-            margin-bottom: 10px;
+            margin: 0 0 15px 0;
         }
 
         input {
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #ffb3c1;
-            margin-top: 10px;
-            width: 90%;
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid #ffb3c1;
             text-align: center;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            outline: none;
+            margin-bottom: 15px;
         }
 
         button {
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            margin-top: 15px;
+            width: 100%;
+            padding: 15px;
             background: #ff6b81;
             color: white;
-            cursor: pointer;
-            width: 100%;
+            border: none;
+            border-radius: 12px;
             font-weight: bold;
-            transition: transform 0.2s;
+            font-size: 1rem;
+            cursor: pointer;
         }
 
-        button:active {
-            transform: scale(0.95);
-        }
-
-        /* CARTA */
-        #carta {
+        /* Pantalla de la carta */
+        #pantalla-carta {
             display: none;
-            width: 90%;
-            max-width: 600px;
-            background: rgba(255,255,255,0.95);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            animation: aparecer 1.2s ease forwards;
+            width: 100%;
+            height: 100vh;
+            padding: 20px;
             overflow-y: auto;
-            max-height: 80vh;
             position: relative;
-            z-index: 5;
+            background: #ffeef2;
+            animation: fadeIn 1s ease;
         }
 
-        @keyframes aparecer {
-            from { opacity: 0; transform: scale(0.8) translateY(50px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+        .contenido-carta {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: 40px auto;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
             font-family: 'Great Vibes', cursive;
             color: #ff4d6d;
             text-align: center;
-            font-size: 3rem;
-            margin-top: 0;
+            font-size: 2.2rem;
         }
 
         p {
             line-height: 1.8;
             color: #444;
-            font-size: 1.05rem;
-            text-align: justify;
+            font-size: 1rem;
+            white-space: pre-line; /* Mantiene los saltos de línea */
         }
 
-        /* ELEMENTOS DE EXPLOSIÓN */
-        .corazon {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: #ff4d6d;
-            transform: rotate(45deg);
-            pointer-events: none; /* Importante: que no interfiera con los clicks */
-            animation: explotar 1s ease-out forwards;
-        }
-
-        .corazon::before, .corazon::after {
-            content: "";
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: #ff4d6d;
-            border-radius: 50%;
-        }
-        .corazon::before { top: -8px; left: 0; }
-        .corazon::after { left: -8px; top: 0; }
-
-        .girasol {
-            position: absolute;
-            font-size: 20px;
+        /* Emojis animados */
+        .emoji {
+            position: fixed;
             pointer-events: none;
-            animation: explotar 1s ease-out forwards;
+            z-index: 1;
+            font-size: 24px;
+            animation: caer 3s linear forwards;
         }
 
-        @keyframes explotar {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        @keyframes caer {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #error { color: #ff4d6d; font-weight: bold; margin-top: 10px; font-size: 0.9rem; }
     </style>
 </head>
+<body>
 
-<body onclick="explosion(event)">
+    <!-- BLOQUEO -->
+    <div id="pantalla-bloqueo">
+        <div class="caja-login">
+            <h2>Para Sole ❤️</h2>
+            <p style="font-size: 0.9rem; color: #666;">Pista: una fecha importante para nosotros 🌻</p>
+            <input type="text" id="clave" placeholder="DDMMYYYY" inputmode="numeric" maxlength="8">
+            <button onclick="verificar()">Entrar 💌</button>
+            <p id="error"></p>
+        </div>
+    </div>
 
-<div id="bloqueo">
-    <h2>Hay algo para vos ❤️</h2>
-    <p>Pista: una fecha importante para nosotros 🌻<br>(DDMMYYYY)</p>
-    <input type="text" id="clave" placeholder="Ej: 13032024" maxlength="8">
-    <button onclick="verificar()">Entrar 💌</button>
-    <p id="error" style="color:#ff4d6d; font-size: 0.9rem; font-weight: bold;"></p>
-</div>
+    <!-- CARTA -->
+    <div id="pantalla-carta">
+        <div class="contenido-carta">
+            <h1>Para Sole, mi monita 🌻❤️🐒</h1>
+            <p id="texto-amor">
+                Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú; es como si la vida me hubiera dado el regalo más grande del mundo sin que yo hiciera nada para merecerlo.
 
-<div id="carta">
-    <h1>Para Sole, mi monita 🌻❤️</h1>
-    <p>
-        Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú; es como si la vida me hubiera dado el regalo más grande del mundo sin que yo hiciera nada para merecerlo.<br><br>
+                No tienes idea de lo mucho que me fascina todo de ti. Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve loco. Y aunque sé que a veces hay cosas de tu físico que te hacen dudar o que te generan inseguridad, quiero que sepas que me he propuesto como meta que algún día te veas a través de mis ojos. Voy a estar ahí para recordarte lo hermosa que eres, para abrazar cada parte de ti que no te convenza y ayudarte a superar esos miedos, porque para mí eres perfecta tal cual eres.
 
-        No tienes idea de lo mucho que me fascina todo de ti. Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve loco. Y aunque sé que a veces hay cosas de tu físico que te hacen dudar o que te generan inseguridad, quiero que sepas que me he propuesto como meta que algún día te veas a través de mis ojos. Voy a estar ahí para recordarte lo hermosa que eres, para abrazar cada parte de ti que no te convenza y ayudarte a superar esos miedos, porque para mí eres perfecta tal cual eres.<br><br>
+                A veces siento que ni tú misma te das cuenta de lo increíble que eres. No pienso soltarte nunca; mi único plan es construir una vida entera contigo, cumpliendo sueños de la mano y apoyándote en todo. Ahora mismo te extraño tanto que duele. Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites. No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, y de llenarte la frente de besos mientras te susurro cuánto te amo. Cuento los minutos para volver a tenerte cerca. Eres mi todo.
+            </p>
+            <p style="text-align: center; font-size: 1.5rem;">🐒🌻❤️</p>
+        </div>
+    </div>
 
-        A veces siento que ni tú misma te das cuenta de lo increíble que eres. No pienso soltarte nunca; mi único plan es construir una vida entera contigo, cumpliendo sueños de la mano y apoyándote en todo. Ahora mismo te extraño tanto que duele. Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites. No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, y de llenarte la frente de besos mientras te susurro cuánto te amo. Cuento los minutos para volver a tenerte cerca. Eres mi todo.
-    </p>
-</div>
+    <script>
+        const claveCorrecta = "13032026"; // Cambia aquí tu fecha
 
-<script>
-const claveCorrecta = "13032026"; 
+        function verificar() {
+            const input = document.getElementById("clave").value;
+            if (input === claveCorrecta) {
+                document.getElementById("pantalla-bloqueo").style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById("pantalla-bloqueo").style.display = "none";
+                    document.getElementById("pantalla-carta").style.display = "block";
+                    iniciarLluvia();
+                }, 500);
+            } else {
+                document.getElementById("error").innerText = "Esa no es la fecha, monita 😢";
+            }
+        }
 
-function verificar() {
-    const input = document.getElementById("clave").value;
+        function crearEmoji() {
+            const emojis = ["❤️", "🌻", "🐒", "✨", "💖", "🌸"];
+            const e = document.createElement("div");
+            e.classList.add("emoji");
+            e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            e.style.left = Math.random() * 100 + "vw";
+            e.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            document.body.appendChild(e);
+            
+            setTimeout(() => e.remove(), 4000);
+        }
 
-    if (input === claveCorrecta) {
-        document.getElementById("bloqueo").style.display = "none";
-        document.getElementById("carta").style.display = "block";
-        // Pequeño truco: lanzar una explosión automática al entrar
-        lanzarExplosionAutomatica();
-    } else {
-        document.getElementById("error").innerText = "Esa no es, monita 😢";
-    }
-}
+        function iniciarLluvia() {
+            setInterval(crearEmoji, 300);
+        }
 
-function explosion(e) {
-    // Solo permitimos la explosión manual si la carta ya es visible
-    if (document.getElementById("carta").style.display !== "block") return;
-
-    for (let i = 0; i < 12; i++) {
-        crearElemento(e.clientX, e.clientY, "corazon");
-        crearElemento(e.clientX, e.clientY, "girasol");
-    }
-}
-
-function crearElemento(x, y, tipo) {
-    const el = document.createElement("div");
-    el.classList.add(tipo);
-    if (tipo === "girasol") el.innerText = "🌻";
-    
-    el.style.left = x + "px";
-    el.style.top = y + "px";
-    
-    // Dispersión más circular y natural
-    const angle = Math.random() * Math.PI * 2;
-    const dist = 50 + Math.random() * 150;
-    const destX = Math.cos(angle) * dist + 'px';
-    const destY = Math.sin(angle) * dist + 'px';
-    
-    el.style.setProperty('--x', destX);
-    el.style.setProperty('--y', destY);
-    
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 1000);
-}
-
-function lanzarExplosionAutomatica() {
-    const x = window.innerWidth / 2;
-    const y = window.innerHeight / 2;
-    for (let i = 0; i < 30; i++) {
-        crearElemento(x, y, "corazon");
-        crearElemento(x, y, "girasol");
-    }
-}
-</script>
-
+        // Permitir entrar con la tecla "Enter"
+        document.getElementById("clave").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                verificar();
+            }
+        });
+    </script>
 </body>
 </html>
