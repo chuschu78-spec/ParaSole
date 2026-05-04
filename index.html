@@ -9,7 +9,7 @@
         :root {
             --rosa-claro: #ffe5ec;
             --rosa-fuerte: #ff4d6d;
-            --dorado: #ffb703;
+            --naranja-suave: #ffb38a;
         }
 
         body {
@@ -17,13 +17,13 @@
             padding: 0;
             font-family: 'Poppins', sans-serif;
             background-color: var(--rosa-claro);
-            /* Fondo con patrón de corazones sutil */
             background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
-            overflow: hidden; /* Evita scroll durante la verificación */
+            transition: background-color 1.5s ease;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
 
         /* Pantalla de Verificación */
@@ -31,27 +31,21 @@
             background: white;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             text-align: center;
-            z-index: 100;
-            max-width: 90%;
-        }
-
-        #pantalla-verificacion h2 {
-            color: var(--rosa-fuerte);
-            font-family: 'Great Vibes', cursive;
-            font-size: 32px;
-            margin-bottom: 20px;
+            z-index: 1000;
+            max-width: 320px;
         }
 
         .input-fecha {
-            padding: 10px;
+            padding: 12px;
             font-size: 18px;
             border: 2px solid var(--rosa-fuerte);
-            border-radius: 10px;
+            border-radius: 12px;
             text-align: center;
+            width: 80%;
             outline: none;
-            width: 200px;
+            font-family: 'Poppins', sans-serif;
         }
 
         .btn-verificar {
@@ -60,141 +54,163 @@
             background: var(--rosa-fuerte);
             color: white;
             border: none;
-            padding: 10px 25px;
-            border-radius: 20px;
+            padding: 12px 30px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 16px;
+            font-weight: 600;
             transition: transform 0.2s;
         }
 
         .btn-verificar:hover { transform: scale(1.05); }
 
-        /* Contenedor Principal (Oculto al inicio) */
+        /* Contenedor Principal */
         #contenido-principal {
             display: none;
-            max-width: 800px;
+            max-width: 700px;
             margin: auto;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
+            height: 100vh;
             overflow-y: auto;
-            height: 90vh;
+            scrollbar-width: none;
         }
+        #contenido-principal::-webkit-scrollbar { display: none; }
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 55px;
+            font-size: 60px;
             color: var(--rosa-fuerte);
-            text-shadow: 2px 2px white;
+            margin-top: 60px;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
         }
 
-        .texto {
-            font-size: 18px;
+        .texto-animado {
+            font-size: 20px;
             color: #333;
             line-height: 1.8;
             background: rgba(255, 255, 255, 0.85);
-            padding: 30px;
-            border-radius: 20px;
-            border: 2px solid var(--rosa-fuerte);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 40px;
+            border-radius: 25px;
+            border-left: 8px solid var(--rosa-fuerte);
+            margin-bottom: 100px;
+            text-align: left;
+            white-space: pre-wrap;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        /* Efecto de explosión de corazones */
+        .firma-final {
+            font-family: 'Great Vibes', cursive;
+            font-size: 40px;
+            color: var(--rosa-fuerte);
+            opacity: 0;
+            transition: opacity 2s ease;
+            padding-bottom: 100px;
+        }
+
+        /* Explosión de corazones */
         .heart-particle {
             position: fixed;
             pointer-events: none;
-            font-size: 20px;
-            z-index: 999;
-            user-select: none;
+            z-index: 9999;
+            font-size: 24px;
         }
 
         @keyframes explode {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body onclick="explotarCorazones(event)">
 
-    <!-- Pestaña de Verificación -->
+    <!-- Verificación -->
     <div id="pantalla-verificacion">
-        <h2>Ingresa nuestra fecha especial</h2>
-        <p>Día / Mes / Año</p>
+        <h2 style="font-family: 'Great Vibes'; font-size: 38px; color: var(--rosa-fuerte); margin: 0 0 15px 0;">Para Sole ❤️</h2>
+        <p style="font-size: 14px; color: #666; margin-bottom: 20px;">Ingresa nuestra fecha especial para continuar</p>
         <input type="text" id="fechaInput" class="input-fecha" placeholder="DDMMYYYY" maxlength="8">
-        <button class="btn-verificar" onclick="verificarFecha()">Entrar ❤️</button>
-        <p id="error" style="color: red; display: none; margin-top: 10px;">Esa no es la fecha, inténtalo de nuevo...</p>
+        <button class="btn-verificar" onclick="verificarFecha()">Entrar al mensaje</button>
+        <p id="error" style="color: var(--rosa-fuerte); display: none; margin-top: 15px; font-size: 13px;">Esa fecha no es, inténtalo de nuevo 🥺</p>
     </div>
 
-    <!-- Contenido Romántico -->
-    <div id="contenido-principal">
+    <!-- Contenido -->
+    <div id="contenido-principal" onscroll="cambiarFondo()">
         <h1>Para Sole, mi monita 🌻❤️</h1>
 
-        <div class="texto">
-            Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. 
-            A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú; es como si la vida me hubiera dado el regalo más grande del mundo sin que yo hiciera nada para merecerlo.<br><br>
+        <div id="textoCarta" class="texto-animado"></div>
 
-            No tienes idea de lo mucho que me fascina todo de ti. Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve loco. 
-            Y aunque sé que a veces hay cosas de tu físico que te hacen dudar o que te generan inseguridad, quiero que sepas que me he propuesto como meta que algún día te veas a través de mis ojos. 
-            Voy a estar ahí para recordarte lo hermosa que eres, para abrazar cada parte de ti que no te convenza y ayudarte a superar esos miedos, porque para mí eres perfecta tal cual eres.<br><br>
-
-            A veces siento que ni tú misma te das cuenta de lo increíble que eres. 
-            No pienso soltarte nunca; mi único plan es construir una vida entera contigo, cumpliendo sueños de la mano y apoyándote en todo. 
-            Ahora mismo te extraño tanto que duele. Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites.<br><br>
-
-            No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, y de llenarte la frente de besos mientras te susurro cuánto te amo. 
-            Cuento los minutos para volver a tenerte cerca.<br><br>
-
-            <b>Eres mi todo. ❤️🌻</b>
+        <div id="firma" class="firma-final">
+            Por siempre tuyo... ❤️
         </div>
     </div>
 
     <script>
-        // Función para verificar el código (13032026)
+        const mensaje = `Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú; es como si la vida me hubiera dado el regalo más grande del mundo sin que yo hiciera nada para merecerlo.
+
+No tienes idea de lo mucho que me fascina todo de ti. Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve loco. Y aunque sé que a veces hay cosas de tu físico que te hacen dudar o que te generan inseguridad, quiero que sepas que me he propuesto como meta que algún día te veas a través de mis ojos. Voy a estar ahí para recordarte lo hermosa que eres, para abrazar cada parte de ti que no te convenza y ayudarte a superar esos miedos, porque para mí eres perfecta tal cual eres.
+
+A veces siento que ni tú misma te das cuenta de lo increíble que eres. No pienso soltarte nunca; mi único plan es construir una vida entera contigo, cumpliendo sueños de la mano y apoyándote en todo. Ahora mismo te extraño tanto que duele. Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites.
+
+No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, y de llenarte la frente de besos mientras te susurro cuánto te amo. Cuento los minutos para volver a tenerte cerca.
+
+Eres mi todo. ❤️🌻`;
+
         function verificarFecha() {
             const input = document.getElementById('fechaInput').value;
-            const error = document.getElementById('error');
-            const pantalla = document.getElementById('pantalla-verificacion');
-            const contenido = document.getElementById('contenido-principal');
-
             if (input === "13032026") {
-                pantalla.style.display = "none";
-                contenido.style.display = "block";
-                document.body.style.overflow = "auto"; // Habilita el scroll
-                document.body.style.display = "block"; // Alineación normal
+                document.getElementById('pantalla-verificacion').style.display = "none";
+                document.getElementById('contenido-principal').style.display = "block";
+                document.body.style.display = "block";
+                escribirTexto();
             } else {
-                error.style.display = "block";
+                document.getElementById('error').style.display = "block";
             }
         }
 
-        // Función de explosión de corazones al hacer clic
+        // Animación de escritura
+        let i = 0;
+        function escribirTexto() {
+            if (i < mensaje.length) {
+                document.getElementById("textoCarta").innerHTML += mensaje.charAt(i);
+                i++;
+                // Velocidad de escritura
+                setTimeout(escribirTexto, 45);
+            } else {
+                // Muestra la firma al final
+                document.getElementById("firma").style.opacity = "1";
+            }
+        }
+
+        // Cambio de fondo al hacer scroll
+        function cambiarFondo() {
+            const scrollPos = document.getElementById('contenido-principal').scrollTop;
+            const body = document.body;
+            
+            if (scrollPos < 200) {
+                body.style.backgroundColor = "#ffe5ec"; 
+            } else {
+                body.style.backgroundColor = "#ffc2d1";
+            }
+        }
+
+        // Explosión de corazones al hacer clic
         function explotarCorazones(e) {
             const cantidad = 10;
-            const emojis = ["❤️", "💖", "💗", "🌻", "💕"];
-            
+            const emojis = ["❤️", "💖", "💗", "🌻", "✨"];
             for (let i = 0; i < cantidad; i++) {
                 const p = document.createElement('div');
                 p.classList.add('heart-particle');
                 p.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-                
-                // Posición inicial (donde se hizo clic)
                 p.style.left = e.clientX + 'px';
                 p.style.top = e.clientY + 'px';
-                
-                // Dirección aleatoria
-                const tx = (Math.random() - 0.5) * 300;
-                const ty = (Math.random() - 0.5) * 300;
+                const tx = (Math.random() - 0.5) * 400;
+                const ty = (Math.random() - 0.5) * 400;
                 p.style.setProperty('--tx', `${tx}px`);
                 p.style.setProperty('--ty', `${ty}px`);
-                
-                // Animación
-                p.style.animation = `explode ${1 + Math.random()}s forwards ease-out`;
-                
+                p.style.animation = `explode ${1 + Math.random()}s forwards cubic-bezier(0, .9, .57, 1)`;
                 document.body.appendChild(p);
-                
-                // Limpiar el DOM
-                setTimeout(() => p.remove(), 1500);
+                setTimeout(() => p.remove(), 1200);
             }
         }
     </script>
-
 </body>
 </html>
