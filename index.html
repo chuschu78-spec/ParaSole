@@ -32,34 +32,21 @@ h1 {
     font-size: 18px;
     color: #333;
     line-height: 1.6;
-    background: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.8);
     padding: 20px;
     border-radius: 15px;
 }
 
-/* corazones flotando */
-.corazon {
+/* elementos flotando */
+.flotante {
     position: fixed;
-    color: red;
     animation: flotar 6s linear infinite;
-    font-size: 20px;
+    pointer-events: none;
 }
 
 @keyframes flotar {
     0% { transform: translateY(100vh); opacity: 1; }
     100% { transform: translateY(-10vh); opacity: 0; }
-}
-
-/* girasoles */
-.girasol {
-    position: fixed;
-    width: 40px;
-    animation: girar 10s linear infinite;
-}
-
-@keyframes girar {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
 }
 </style>
 
@@ -90,35 +77,22 @@ h1 {
 </div>
 
 <script>
-// corazones
-function crearCorazon() {
-    const corazon = document.createElement("div");
-    corazon.classList.add("corazon");
-    corazon.innerHTML = "❤️";
-    corazon.style.left = Math.random() * 100 + "vw";
-    corazon.style.fontSize = (Math.random() * 20 + 10) + "px";
-    document.body.appendChild(corazon);
+const elementos = ["❤️","💖","💘","💞","🌻","🌻","🌻"];
+
+function crearElemento() {
+    const el = document.createElement("div");
+    el.classList.add("flotante");
+    el.innerText = elementos[Math.floor(Math.random() * elementos.length)];
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (Math.random() * 20 + 15) + "px";
+    document.body.appendChild(el);
 
     setTimeout(() => {
-        corazon.remove();
+        el.remove();
     }, 6000);
 }
-setInterval(crearCorazon, 300);
 
-// girasoles
-function crearGirasol() {
-    const girasol = document.createElement("img");
-    girasol.src = "https://cdn-icons-png.flaticon.com/512/2909/2909760.png";
-    girasol.classList.add("girasol");
-    girasol.style.left = Math.random() * 100 + "vw";
-    girasol.style.top = Math.random() * 100 + "vh";
-    document.body.appendChild(girasol);
-
-    setTimeout(() => {
-        girasol.remove();
-    }, 10000);
-}
-setInterval(crearGirasol, 800);
+setInterval(crearElemento, 300);
 </script>
 
 </body>
