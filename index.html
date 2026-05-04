@@ -1,1 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Sole ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-claro: #ffe5ec;
+            --rosa-fuerte: #ff4d6d;
+            --dorado: #ffb703;
+        }
 
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--rosa-claro);
+            /* Fondo con patrón de corazones sutil */
+            background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
+            overflow: hidden; /* Evita scroll durante la verificación */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Pantalla de Verificación */
+        #pantalla-verificacion {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            z-index: 100;
+            max-width: 90%;
+        }
+
+        #pantalla-verificacion h2 {
+            color: var(--rosa-fuerte);
+            font-family: 'Great Vibes', cursive;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .input-fecha {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid var(--rosa-fuerte);
+            border-radius: 10px;
+            text-align: center;
+            outline: none;
+            width: 200px;
+        }
+
+        .btn-verificar {
+            display: block;
+            margin: 20px auto 0;
+            background: var(--rosa-fuerte);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+
+        .btn-verificar:hover { transform: scale(1.05); }
+
+        /* Contenedor Principal (Oculto al inicio) */
+        #contenido-principal {
+            display: none;
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            text-align: center;
+            overflow-y: auto;
+            height: 90vh;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 55px;
+            color: var(--rosa-fuerte);
+            text-shadow: 2px 2px white;
+        }
+
+        .texto {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.8;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid var(--rosa-fuerte);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Efecto de explosión de corazones */
+        .heart-particle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 20px;
+            z-index: 999;
+            user-select: none;
+        }
+
+        @keyframes explode {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+    </style>
+</head>
+<body onclick="explotarCorazones(event)">
+
+    <!-- Pestaña de Verificación -->
+    <div id="pantalla-verificacion">
+        <h2>Ingresa nuestra fecha especial</h2>
+        <p>Día / Mes / Año</p>
+        <input type="text" id="fechaInput" class="input-fecha" placeholder="DDMMYYYY" maxlength="8">
+        <button class="btn-verificar" onclick="verificarFecha()">Entrar ❤️</button>
+        <p id="error" style="color: red; display: none; margin-top: 10px;">Esa no es la fecha, inténtalo de nuevo...</p>
+    </div>
+
+    <!-- Contenido Romántico -->
+    <div id="contenido-principal">
+        <h1>Para Sole, mi monita 🌻❤️</h1>
+
+        <div class="texto">
+            Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. 
+            A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú; es como si la vida me hubiera dado el regalo más grande del mundo sin que yo hiciera nada para merecerlo.<br><br>
+
+            No tienes idea de lo mucho que me fascina todo de ti. Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve loco. 
+            Y aunque sé que a veces hay cosas de tu físico que te hacen dudar o que te generan inseguridad, quiero que sepas que me he propuesto como meta que algún día te veas a través de mis ojos. 
+            Voy a estar ahí para recordarte lo hermosa que eres, para abrazar cada parte de ti que no te convenza y ayudarte a superar esos miedos, porque para mí eres perfecta tal cual eres.<br><br>
+
+            A veces siento que ni tú misma te das cuenta de lo increíble que eres. 
+            No pienso soltarte nunca; mi único plan es construir una vida entera contigo, cumpliendo sueños de la mano y apoyándote en todo. 
+            Ahora mismo te extraño tanto que duele. Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites.<br><br>
+
+            No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, y de llenarte la frente de besos mientras te susurro cuánto te amo. 
+            Cuento los minutos para volver a tenerte cerca.<br><br>
+
+            <b>Eres mi todo. ❤️🌻</b>
+        </div>
+    </div>
+
+    <script>
+        // Función para verificar el código (13032026)
+        function verificarFecha() {
+            const input = document.getElementById('fechaInput').value;
+            const error = document.getElementById('error');
+            const pantalla = document.getElementById('pantalla-verificacion');
+            const contenido = document.getElementById('contenido-principal');
+
+            if (input === "13032026") {
+                pantalla.style.display = "none";
+                contenido.style.display = "block";
+                document.body.style.overflow = "auto"; // Habilita el scroll
+                document.body.style.display = "block"; // Alineación normal
+            } else {
+                error.style.display = "block";
+            }
+        }
+
+        // Función de explosión de corazones al hacer clic
+        function explotarCorazones(e) {
+            const cantidad = 10;
+            const emojis = ["❤️", "💖", "💗", "🌻", "💕"];
+            
+            for (let i = 0; i < cantidad; i++) {
+                const p = document.createElement('div');
+                p.classList.add('heart-particle');
+                p.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                // Posición inicial (donde se hizo clic)
+                p.style.left = e.clientX + 'px';
+                p.style.top = e.clientY + 'px';
+                
+                // Dirección aleatoria
+                const tx = (Math.random() - 0.5) * 300;
+                const ty = (Math.random() - 0.5) * 300;
+                p.style.setProperty('--tx', `${tx}px`);
+                p.style.setProperty('--ty', `${ty}px`);
+                
+                // Animación
+                p.style.animation = `explode ${1 + Math.random()}s forwards ease-out`;
+                
+                document.body.appendChild(p);
+                
+                // Limpiar el DOM
+                setTimeout(() => p.remove(), 1500);
+            }
+        }
+    </script>
+
+</body>
+</html>
