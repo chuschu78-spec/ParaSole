@@ -1,244 +1,273 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Sole ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --rosa-claro: #ffe5ec;
-            --rosa-fuerte: #ff4d6d;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Sole ❤️</title>
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--rosa-claro);
-            background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            transition: background-color 1.5s ease;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-        /* Pantalla de Verificación */
-        #pantalla-verificacion {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            text-align: center;
-            z-index: 1000;
-            max-width: 320px;
-        }
+<style>
+:root {
+    --rosa-claro: #ffe5ec;
+    --rosa-fuerte: #ff4d6d;
+}
 
-        .input-fecha {
-            padding: 12px;
-            font-size: 18px;
-            border: 2px solid var(--rosa-fuerte);
-            border-radius: 12px;
-            text-align: center;
-            width: 80%;
-            outline: none;
-        }
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--rosa-claro);
+    background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 
-        .btn-verificar {
-            display: block;
-            margin: 20px auto 0;
-            background: var(--rosa-fuerte);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-        }
+/* PANTALLA INICIAL */
+#pantalla-verificacion {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    text-align: center;
+    max-width: 320px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+}
 
-        /* Contenedor Principal */
-        #contenido-principal {
-            display: none;
-            max-width: 700px;
-            margin: auto;
-            padding: 20px;
-            text-align: center;
-            height: 100vh;
-            overflow-y: auto;
-            scrollbar-width: none;
-        }
-        #contenido-principal::-webkit-scrollbar { display: none; }
+.titulo-principal {
+    font-family: 'Great Vibes', cursive;
+    font-size: 40px;
+    color: var(--rosa-fuerte);
+}
 
-        h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 55px;
-            color: var(--rosa-fuerte);
-            margin-top: 60px;
-        }
+.pista {
+    margin-top: 10px;
+    font-size: 15px;
+    color: #666;
+}
 
-        .texto-animado {
-            font-size: 19px;
-            color: #333;
-            line-height: 1.8;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 30px;
-            border-radius: 25px;
-            border-left: 8px solid var(--rosa-fuerte);
-            margin-bottom: 50px;
-            text-align: left;
-            white-space: pre-wrap;
-        }
+.input-fecha {
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 18px;
+    border: 2px solid var(--rosa-fuerte);
+    border-radius: 12px;
+    text-align: center;
+    width: 80%;
+}
 
-        /* Emojis Flotantes (Lluvia hacia arriba) */
-        .flotante {
-            position: fixed;
-            bottom: -50px;
-            font-size: 24px;
-            user-select: none;
-            pointer-events: none;
-            z-index: 1;
-            animation: subir 6s linear forwards;
-        }
+.btn-verificar {
+    margin-top: 15px;
+    background: var(--rosa-fuerte);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+}
 
-        @keyframes subir {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
-        }
+/* CONTENIDO */
+#contenido-principal {
+    display: none;
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    min-height: 100vh;
+}
 
-        /* El Monito Caminante */
-        #monito {
-            position: fixed;
-            bottom: 10px;
-            left: -100px;
-            font-size: 40px;
-            z-index: 100;
-            transition: transform 0.2s;
-            user-select: none;
-            pointer-events: none;
-        }
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 55px;
+    color: var(--rosa-fuerte);
+    margin-top: 60px;
+}
 
-        /* Explosión de click */
-        .heart-particle {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-        }
+.texto-animado {
+    font-size: 19px;
+    color: #333;
+    line-height: 1.8;
+    background: rgba(255,255,255,0.9);
+    padding: 30px;
+    border-radius: 25px;
+    border-left: 8px solid var(--rosa-fuerte);
+    text-align: left;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
 
-        @keyframes explode {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
-        }
-    </style>
+/* SECCIÓN GATITOS */
+.contenedor-gatitos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.gif-gatito {
+    width: 250px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 4px solid white;
+}
+
+/* FRASES DESTACADAS */
+.destacar {
+    color: var(--rosa-fuerte);
+    font-weight: 600;
+    opacity: 0;
+    animation: aparecer 1.5s ease forwards;
+}
+
+@keyframes aparecer {
+    to {
+        opacity: 1;
+        text-shadow: 0 0 10px rgba(255,77,109,0.5);
+    }
+}
+
+/* MONITO */
+#monito-caminante {
+    position: fixed;
+    bottom: 20px;
+    left: -100px;
+    font-size: 50px;
+    z-index: 9999;
+    pointer-events: none;
+    display: none;
+}
+
+/* EXPLOSIÓN CORAZONES */
+.heart-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@keyframes explode {
+    0% { transform: translate(0,0) scale(1); opacity:1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity:0; }
+}
+</style>
 </head>
-<body onclick="explotarCorazones(event)">
 
-    <div id="pantalla-verificacion">
-        <h2 style="font-family: 'Great Vibes'; font-size: 38px; color: var(--rosa-fuerte);">Para Sole ❤️</h2>
-        <input type="text" id="fechaInput" class="input-fecha" placeholder="DDMMYYYY" maxlength="8">
-        <button class="btn-verificar" onclick="verificarFecha()">Entrar al mensaje</button>
-        <p id="error" style="color: var(--rosa-fuerte); display: none; margin-top: 15px;">Fecha incorrecta... 🥺</p>
+<body>
+
+<!-- PANTALLA DE ENTRADA -->
+<div id="pantalla-verificacion">
+    <div class="titulo-principal">Para Sole ❤️</div>
+    <div class="pista">
+        <b>Pista:</b> Nuestra Fecha Especial (Día, Mes, Año)
+    </div>
+    <input type="tel" id="fechaInput" class="input-fecha" placeholder="DDMMYYYY" maxlength="8">
+    <button class="btn-verificar" onclick="verificarFecha()">Entrar 💌</button>
+    <p id="error" style="color:red; display:none;">Fecha incorrecta... 🥺</p>
+</div>
+
+<!-- CONTENIDO PRINCIPAL -->
+<div id="contenido-principal">
+    <h1>Para Sole, mi monita 🌻❤️</h1>
+    
+    <div id="textoCarta" class="texto-animado"></div>
+
+    <!-- AQUÍ ESTÁN LOS GATITOS -->
+    <div class="contenedor-gatitos">
+        <img class="gif-gatito" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3R6bm9qZWh4YXN3bm9ueXp5eG94bm9ueXp5eG94bm9ueXp5eG94JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/MDJ9IbxxvDUQM/giphy.gif" alt="Gatitos abrazándose">
+        <img class="gif-gatito" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueXp5eG94bm9ueXp5eG94bm9ueXp5eG94bm9ueXp5eG94JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/11I5uX970Gsc6I/giphy.gif" alt="Gatitos amor">
     </div>
 
-    <div id="contenido-principal">
-        <h1>Para Sole, mi monita 🌻❤️</h1>
-        <div id="textoCarta" class="texto-animado"></div>
-        <div style="font-family: 'Great Vibes'; font-size: 40px; color: var(--rosa-fuerte); padding-bottom: 100px;">
-            Eres mi todo. ❤️🌻
-        </div>
+    <div style="font-family:'Great Vibes'; font-size:40px; color:var(--rosa-fuerte); padding-bottom:100px;">
+        Eres mi todo. ❤️🌻
     </div>
+</div>
 
-    <!-- El Monito -->
-    <div id="monito">🐒</div>
+<div id="monito-caminante">🐒</div>
 
-    <script>
-        const mensaje = `Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú.
+<script>
+const mensaje = `Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú; es como si la vida me hubiera dado el regalo más grande del mundo sin que yo hiciera nada para merecerlo.
 
-Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve loco. Quiero que sepas que me he propuesto como meta que algún día te veas a través de mis ojos. Voy a estar ahí para recordarte lo hermosa que eres, porque para mí eres perfecta tal cual eres.
+<span class="destacar">No tienes idea de lo mucho que me fascina todo de ti.</span>
 
-No pienso soltarte nunca; mi único plan es construir una vida entera contigo. Te extraño tanto que duele. Me muero por sentir esa paz que solo tú me transmites.
+Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve loco. A veces siento que ni tú misma te das cuenta de lo increíble que eres. No pienso soltarte nunca; mi único plan es construir una vida entera contigo, cumpliendo sueños de la mano y estando ahí para ti, en las buenas y en las malas.
 
-Cuento los minutos para volver a tenerte cerca. ❤️🌻`;
+<span class="destacar">Ahora mismo te extraño tanto que duele.</span>
 
-        function verificarFecha() {
-            const input = document.getElementById('fechaInput').value;
-            if (input === "13032026") {
-                document.getElementById('pantalla-verificacion').style.display = "none";
-                document.getElementById('contenido-principal').style.display = "block";
-                escribirTexto();
-                iniciarFlotantes();
-                caminarMonito();
-            } else {
-                document.getElementById('error').style.display = "block";
-            }
+Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites. No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, y de llenarte la frente de besos mientras te susurro cuánto te amo. Cuento los minutos para volver a tenerte cerca.`;
+
+let i = 0;
+function escribirTexto() {
+    const cont = document.getElementById("textoCarta");
+
+    if (i < mensaje.length) {
+        if (mensaje[i] === "<") {
+            const cierre = mensaje.indexOf(">", i);
+            cont.innerHTML += mensaje.substring(i, cierre + 1);
+            i = cierre + 1;
+        } else {
+            cont.innerHTML += mensaje[i];
+            i++;
+        }
+        setTimeout(escribirTexto, 25);
+    }
+}
+
+function verificarFecha() {
+    const input = document.getElementById('fechaInput').value;
+
+    // Nota: Mantengo tu fecha actual 13032026
+    if (input === "13032026") {
+        document.getElementById('pantalla-verificacion').style.display = "none";
+        document.getElementById('contenido-principal').style.display = "block";
+        document.getElementById('monito-caminante').style.display = "block";
+
+        escribirTexto();
+        iniciarMonito();
+    } else {
+        document.getElementById('error').style.display = "block";
+    }
+}
+
+function iniciarMonito() {
+    const mono = document.getElementById("monito-caminante");
+    let x = -100;
+    let vel = 2;
+
+    function animar() {
+        x += vel;
+        mono.style.left = x + "px";
+
+        if (x > window.innerWidth - 60 || x < -50) {
+            vel *= -1;
+            mono.style.transform = vel > 0 ? "scaleX(1)" : "scaleX(-1)";
         }
 
-        // Escritura
-        let i = 0;
-        function escribirTexto() {
-            if (i < mensaje.length) {
-                document.getElementById("textoCarta").innerHTML += mensaje.charAt(i);
-                i++;
-                setTimeout(escribirTexto, 45);
-            }
-        }
+        requestAnimationFrame(animar);
+    }
+    animar();
+}
 
-        // Emojis Flotantes (Solo corazones y girasoles)
-        function iniciarFlotantes() {
-            const emojis = ["❤️", "🌻", "💖", "✨"];
-            setInterval(() => {
-                const e = document.createElement("div");
-                e.classList.add("flotante");
-                e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-                e.style.left = Math.random() * 100 + "vw";
-                e.style.fontSize = (Math.random() * 20 + 20) + "px";
-                document.body.appendChild(e);
-                setTimeout(() => e.remove(), 6000);
-            }, 600);
-        }
+document.addEventListener("click", function(e){
+    for (let i = 0; i < 10; i++) {
+        const p = document.createElement('div');
+        p.classList.add('heart-particle');
+        p.innerHTML = "❤️";
+        p.style.left = e.clientX + 'px';
+        p.style.top = e.clientY + 'px';
+        const tx = (Math.random() - 0.5) * 300;
+        const ty = (Math.random() - 0.5) * 300;
+        p.style.setProperty('--tx', tx + "px");
+        p.style.setProperty('--ty', ty + "px");
+        p.style.animation = "explode 1s forwards";
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 1000);
+    }
+});
+</script>
 
-        // Lógica del Monito Caminante
-        function caminarMonito() {
-            const monito = document.getElementById("monito");
-            let pos = -100;
-            let direccion = 1; // 1 derecha, -1 izquierda
-
-            setInterval(() => {
-                pos += (2 * direccion);
-                monito.style.left = pos + "px";
-
-                // Si llega al final de la pantalla, da la vuelta
-                if (pos > window.innerWidth) {
-                    direccion = -1;
-                    monito.style.transform = "scaleX(-1)"; // Gira el emoji
-                } else if (pos < -100) {
-                    direccion = 1;
-                    monito.style.transform = "scaleX(1)";
-                }
-            }, 50);
-        }
-
-        // Explosión de click
-        function explotarCorazones(e) {
-            const emojis = ["❤️", "🌻", "💖"];
-            for (let i = 0; i < 8; i++) {
-                const p = document.createElement('div');
-                p.classList.add('heart-particle');
-                p.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-                p.style.left = e.clientX + 'px';
-                p.style.top = e.clientY + 'px';
-                const tx = (Math.random() - 0.5) * 300;
-                const ty = (Math.random() - 0.5) * 300;
-                p.style.setProperty('--tx', `${tx}px`);
-                p.style.setProperty('--ty', `${ty}px`);
-                p.style.animation = `explode 1s forwards`;
-                document.body.appendChild(p);
-                setTimeout(() => p.remove(), 1000);
-            }
-        }
-    </script>
 </body>
 </html>
