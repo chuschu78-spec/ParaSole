@@ -32,16 +32,17 @@ h1 {
     font-size: 18px;
     color: #333;
     line-height: 1.6;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.85);
     padding: 20px;
     border-radius: 15px;
 }
 
-/* elementos flotando */
-.flotante {
+/* monitos flotando */
+.monito {
     position: fixed;
-    animation: flotar 6s linear infinite;
+    animation: flotar 8s linear infinite;
     pointer-events: none;
+    font-size: 24px;
 }
 
 @keyframes flotar {
@@ -55,7 +56,7 @@ h1 {
 <body>
 
 <div class="container">
-    <h1>Para Sole, mi monita 🌻❤️</h1>
+    <h1>Para Sole, mi monita 🐵❤️</h1>
 
     <div class="texto">
         Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. 
@@ -72,27 +73,26 @@ h1 {
         No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, y de llenarte la frente de besos mientras te susurro cuánto te amo. 
         Cuento los minutos para volver a tenerte cerca.<br><br>
 
-        <b>Eres mi todo. ❤️🌻</b>
+        <b>Eres mi todo. ❤️🐵</b>
     </div>
 </div>
 
 <script>
-const elementos = ["❤️","💖","💘","💞","🌻","🌻","🌻"];
+const monitos = ["🐵","🐒","❤️"];
 
-function crearElemento() {
-    const el = document.createElement("div");
-    el.classList.add("flotante");
-    el.innerText = elementos[Math.floor(Math.random() * elementos.length)];
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.fontSize = (Math.random() * 20 + 15) + "px";
-    document.body.appendChild(el);
+function crearMonito() {
+    const m = document.createElement("div");
+    m.classList.add("monito");
+    m.innerText = monitos[Math.floor(Math.random() * monitos.length)];
+    m.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(m);
 
     setTimeout(() => {
-        el.remove();
-    }, 6000);
+        m.remove();
+    }, 8000);
 }
 
-setInterval(crearElemento, 300);
+setInterval(crearMonito, 500);
 </script>
 
 </body>
