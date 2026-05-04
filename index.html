@@ -1,223 +1,216 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Para Sole ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Sole ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ffd6e0, #fff3b0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffd6e0, #fff3b0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            user-select: none; /* Evita que se seleccione el texto al hacer click rápido */
+        }
 
-/* BLOQUEO */
-#bloqueo {
-    text-align: center;
-    max-width: 300px;
-}
+        /* BLOQUEO */
+        #bloqueo {
+            text-align: center;
+            max-width: 300px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
 
-h2 {
-    font-family: 'Great Vibes', cursive;
-    color: #ff4d6d;
-}
+        h2 {
+            font-family: 'Great Vibes', cursive;
+            color: #ff4d6d;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
 
-input {
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    margin-top: 10px;
-    width: 100%;
-}
+        input {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ffb3c1;
+            margin-top: 10px;
+            width: 90%;
+            text-align: center;
+            font-size: 1rem;
+        }
 
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    margin-top: 10px;
-    background: #ff6b81;
-    color: white;
-    cursor: pointer;
-    width: 100%;
-}
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 15px;
+            background: #ff6b81;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
 
-/* SOBRE */
-.sobre {
-    display: none;
-    width: 300px;
-    height: 200px;
-    background: #ff6b81;
-    position: relative;
-    cursor: pointer;
-    border-radius: 10px;
-}
+        button:active {
+            transform: scale(0.95);
+        }
 
-.tapa {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #ff4d6d;
-    clip-path: polygon(0 0, 50% 50%, 100% 0);
-    transform-origin: top;
-    transition: 1s;
-}
+        /* CARTA */
+        #carta {
+            display: none;
+            width: 90%;
+            max-width: 600px;
+            background: rgba(255,255,255,0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: aparecer 1.2s ease forwards;
+            overflow-y: auto;
+            max-height: 80vh;
+            position: relative;
+            z-index: 5;
+        }
 
-.sobre.abierto .tapa {
-    transform: rotateX(180deg);
-}
+        @keyframes aparecer {
+            from { opacity: 0; transform: scale(0.8) translateY(50px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
 
-/* CARTA */
-.carta {
-    position: absolute;
-    width: 90%;
-    height: 90%;
-    background: white;
-    top: 5%;
-    left: 5%;
-    border-radius: 10px;
-    padding: 15px;
-    overflow-y: auto;
-    transform: translateY(100%);
-    transition: 1s;
-}
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            color: #ff4d6d;
+            text-align: center;
+            font-size: 3rem;
+            margin-top: 0;
+        }
 
-.sobre.abierto .carta {
-    transform: translateY(0);
-}
+        p {
+            line-height: 1.8;
+            color: #444;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
 
-h1 {
-    font-family: 'Great Vibes', cursive;
-    color: #ff4d6d;
-    text-align: center;
-}
+        /* ELEMENTOS DE EXPLOSIÓN */
+        .corazon {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #ff4d6d;
+            transform: rotate(45deg);
+            pointer-events: none; /* Importante: que no interfiera con los clicks */
+            animation: explotar 1s ease-out forwards;
+        }
 
-/* CORAZONES */
-.corazon {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: red;
-    transform: rotate(45deg);
-    animation: explotar 1s ease-out forwards;
-}
+        .corazon::before, .corazon::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #ff4d6d;
+            border-radius: 50%;
+        }
+        .corazon::before { top: -8px; left: 0; }
+        .corazon::after { left: -8px; top: 0; }
 
-.corazon::before,
-.corazon::after {
-    content: "";
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: red;
-    border-radius: 50%;
-}
+        .girasol {
+            position: absolute;
+            font-size: 20px;
+            pointer-events: none;
+            animation: explotar 1s ease-out forwards;
+        }
 
-.corazon::before { top: -7px; }
-.corazon::after { left: -7px; }
-
-/* GIRASOLES */
-.girasol {
-    position: absolute;
-    font-size: 20px;
-    animation: explotar 1s ease-out forwards;
-}
-
-@keyframes explotar {
-    to {
-        transform: translate(var(--x), var(--y));
-        opacity: 0;
-    }
-}
-</style>
+        @keyframes explotar {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        }
+    </style>
 </head>
 
 <body onclick="explosion(event)">
 
-<!-- BLOQUEO -->
 <div id="bloqueo">
-    <h2>Hay algo esperándote... ❤️</h2>
-    <p>
-        Pista: una fecha importante para nosotros 🌻<br>
-        (día, mes y año juntos)
-    </p>
-
-    <input type="password" id="clave" placeholder="DDMMYYYY">
-    <button onclick="verificar()">Descubrir 💌</button>
-
-    <p id="error" style="color:red;"></p>
+    <h2>Hay algo para vos ❤️</h2>
+    <p>Pista: una fecha importante para nosotros 🌻<br>(DDMMYYYY)</p>
+    <input type="text" id="clave" placeholder="Ej: 13032024" maxlength="8">
+    <button onclick="verificar()">Entrar 💌</button>
+    <p id="error" style="color:#ff4d6d; font-size: 0.9rem; font-weight: bold;"></p>
 </div>
 
-<!-- SOBRE -->
-<div class="sobre" onclick="abrir(event)" id="sobre">
-    <div class="tapa"></div>
+<div id="carta">
+    <h1>Para Sole, mi monita 🌻❤️</h1>
+    <p>
+        Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú; es como si la vida me hubiera dado el regalo más grande del mundo sin que yo hiciera nada para merecerlo.<br><br>
 
-    <div class="carta">
-        <h1>Para Sole, mi monita 🌻❤️</h1>
-        <p>
-Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve...<br><br>
+        No tienes idea de lo mucho que me fascina todo de ti. Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve loco. Y aunque sé que a veces hay cosas de tu físico que te hacen dudar o que te generan inseguridad, quiero que sepas que me he propuesto como meta que algún día te veas a través de mis ojos. Voy a estar ahí para recordarte lo hermosa que eres, para abrazar cada parte de ti que no te convenza y ayudarte a superar esos miedos, porque para mí eres perfecta tal cual eres.<br><br>
 
-No tienes idea de lo mucho que me fascina todo de ti...<br><br>
-
-Voy a estar ahí para recordarte lo hermosa que eres...<br><br>
-
-No pienso soltarte nunca...<br><br>
-
-<b>Eres mi todo. ❤️</b>
-        </p>
-    </div>
+        A veces siento que ni tú misma te das cuenta de lo increíble que eres. No pienso soltarte nunca; mi único plan es construir una vida entera contigo, cumpliendo sueños de la mano y apoyándote en todo. Ahora mismo te extraño tanto que duele. Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites. No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, y de llenarte la frente de besos mientras te susurro cuánto te amo. Cuento los minutos para volver a tenerte cerca. Eres mi todo.
+    </p>
 </div>
 
 <script>
-const claveCorrecta = "13032026";
+const claveCorrecta = "13032026"; 
 
 function verificar() {
     const input = document.getElementById("clave").value;
 
     if (input === claveCorrecta) {
         document.getElementById("bloqueo").style.display = "none";
-        document.getElementById("sobre").style.display = "block";
+        document.getElementById("carta").style.display = "block";
+        // Pequeño truco: lanzar una explosión automática al entrar
+        lanzarExplosionAutomatica();
     } else {
-        document.getElementById("error").innerText = "Hmm... esa no es 😢";
+        document.getElementById("error").innerText = "Esa no es, monita 😢";
     }
 }
 
-function abrir(e) {
-    e.stopPropagation();
-    document.getElementById("sobre").classList.toggle("abierto");
+function explosion(e) {
+    // Solo permitimos la explosión manual si la carta ya es visible
+    if (document.getElementById("carta").style.display !== "block") return;
+
+    for (let i = 0; i < 12; i++) {
+        crearElemento(e.clientX, e.clientY, "corazon");
+        crearElemento(e.clientX, e.clientY, "girasol");
+    }
 }
 
-function explosion(e) {
-    for (let i = 0; i < 20; i++) {
+function crearElemento(x, y, tipo) {
+    const el = document.createElement("div");
+    el.classList.add(tipo);
+    if (tipo === "girasol") el.innerText = "🌻";
+    
+    el.style.left = x + "px";
+    el.style.top = y + "px";
+    
+    // Dispersión más circular y natural
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 50 + Math.random() * 150;
+    const destX = Math.cos(angle) * dist + 'px';
+    const destY = Math.sin(angle) * dist + 'px';
+    
+    el.style.setProperty('--x', destX);
+    el.style.setProperty('--y', destY);
+    
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1000);
+}
 
-        // corazones
-        const c = document.createElement("div");
-        c.classList.add("corazon");
-        c.style.left = e.clientX + "px";
-        c.style.top = e.clientY + "px";
-
-        c.style.setProperty('--x', (Math.random()*200-100) + 'px');
-        c.style.setProperty('--y', (Math.random()*200-100) + 'px');
-
-        document.body.appendChild(c);
-        setTimeout(() => c.remove(), 1000);
-
-        // girasoles
-        const g = document.createElement("div");
-        g.classList.add("girasol");
-        g.innerText = "🌻";
-        g.style.left = e.clientX + "px";
-        g.style.top = e.clientY + "px";
-
-        g.style.setProperty('--x', (Math.random()*200-100) + 'px');
-        g.style.setProperty('--y', (Math.random()*200-100) + 'px');
-
-        document.body.appendChild(g);
-        setTimeout(() => g.remove(), 1000);
+function lanzarExplosionAutomatica() {
+    const x = window.innerWidth / 2;
+    const y = window.innerHeight / 2;
+    for (let i = 0; i < 30; i++) {
+        crearElemento(x, y, "corazon");
+        crearElemento(x, y, "girasol");
     }
 }
 </script>
