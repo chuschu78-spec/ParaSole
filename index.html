@@ -9,29 +9,27 @@
 
 <style>
 :root {
-    --amarillo-girasol: #FFD700; /* Un amarillo brillante y cálido */
-    --marron-tierra: #8B4513;   /* Para el texto de contraste */
-    --blanco-crema: #FFF8DC;     /* Para las cajas de texto */
+    --amarillo-girasol: #FFD700;
+    --marron-tierra: #5D4037;
+    --blanco-crema: rgba(255, 250, 240, 0.9);
 }
 
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    /* CAMBIO DE FONDO: Imagen de un campo de girasoles de alta calidad */
-    background-image: url('https://img.freepik.com/foto-gratis/hermoso-campo-girasoles-al-atardecer_1268-18548.jpg');
-    background-size: cover;          /* Asegura que la imagen cubra toda la pantalla */
-    background-position: center;    /* Centra la imagen */
-    background-attachment: fixed;    /* Mantiene el fondo estático al hacer scroll */
+    /* FONGO DE GIRASOLES REFORZADO */
+    background: #2c3e50 url('https://images.unsplash.com/photo-1470252649358-96753a782901?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+    background-size: cover;
     overflow-x: hidden;
     overflow-y: auto;
 }
 
 /* PANTALLA INICIAL */
 #pantalla-verificacion {
-    background: var(--blanco-crema); /* Fondo de la tarjeta */
+    background: white;
     padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Sombra más pronunciada */
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
     text-align: center;
     max-width: 320px;
     position: fixed;
@@ -39,18 +37,14 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10000;
+    border: 3px solid var(--amarillo-girasol);
 }
 
 .titulo-principal {
     font-family: 'Great Vibes', cursive;
-    font-size: 40px;
+    font-size: 45px;
     color: var(--marron-tierra);
-}
-
-.pista {
-    margin-top: 10px;
-    font-size: 15px;
-    color: #444; /* Un marrón oscuro para el texto secundario */
+    margin-bottom: 10px;
 }
 
 .input-fecha {
@@ -60,83 +54,86 @@ body {
     border: 2px solid var(--amarillo-girasol);
     border-radius: 12px;
     text-align: center;
-    width: 80%;
-    color: var(--marron-tierra);
-    background-color: white; /* Para el input */
+    width: 85%;
+    outline: none;
 }
 
 .btn-verificar {
-    margin-top: 15px;
+    margin-top: 20px;
     background: var(--amarillo-girasol);
-    color: var(--marron-tierra); /* Texto del botón */
+    color: var(--marron-tierra);
     border: none;
-    padding: 10px 25px;
-    border-radius: 20px;
+    padding: 12px 30px;
+    border-radius: 25px;
     cursor: pointer;
     font-weight: 600;
+    font-size: 16px;
+    transition: transform 0.2s;
 }
+
+.btn-verificar:hover { transform: scale(1.05); }
 
 /* CONTENIDO */
 #contenido-principal {
     display: none;
-    max-width: 700px;
+    max-width: 750px;
     margin: auto;
-    padding: 20px;
+    padding: 40px 20px;
     text-align: center;
-    min-height: 100vh;
 }
 
 h1 {
     font-family: 'Great Vibes', cursive;
-    font-size: 55px;
-    color: white; /* Texto del título en blanco para contraste */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Sombra de texto */
-    margin-top: 60px;
-}
-
-.texto-animado {
-    font-size: 19px;
-    color: #333; /* Texto principal oscuro */
-    line-height: 1.8;
-    background: rgba(255, 255, 255, 0.85); /* Fondo blanco con opacidad */
-    padding: 30px;
-    border-radius: 25px;
-    border-left: 8px solid var(--amarillo-girasol);
-    text-align: left;
-    font-style: italic;
-    font-weight: 300;
+    font-size: 60px;
+    color: white;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
     margin-bottom: 30px;
 }
 
-/* SECCIÓN GATITOS */
+.texto-animado {
+    font-size: 20px;
+    color: #2c3e50;
+    line-height: 1.9;
+    background: var(--blanco-crema);
+    padding: 40px;
+    border-radius: 30px;
+    border-right: 10px solid var(--amarillo-girasol);
+    text-align: left;
+    font-style: italic;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    min-height: 200px;
+    transition: all 0.5s ease;
+}
+
+/* Estilo para las letras que van apareciendo */
+.letra {
+    animation: fadeIn 0.4s forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.destacar {
+    color: #d35400;
+    font-weight: 600;
+    text-decoration: underline var(--amarillo-girasol);
+}
+
+/* SECCIÓN GATITO ÚNICO */
 .contenedor-gatitos {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
+    margin: 40px 0;
 }
 
 .gif-gatito {
-    width: 250px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    border: 4px solid white;
-}
-
-/* FRASES DESTACADAS */
-.destacar {
-    color: var(--marron-tierra);
-    font-weight: 600;
-    opacity: 0;
-    animation: aparecer 1.5s ease forwards;
-}
-
-@keyframes aparecer {
-    to {
-        opacity: 1;
-        text-shadow: 0 0 10px rgba(139, 69, 19, 0.5); /* Sombra marrón */
-    }
+    width: 280px;
+    border-radius: 20px;
+    border: 6px solid white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
 /* MONITO */
@@ -144,18 +141,13 @@ h1 {
     position: fixed;
     bottom: 20px;
     left: -100px;
-    font-size: 50px;
+    font-size: 55px;
     z-index: 9999;
     pointer-events: none;
     display: none;
 }
 
-/* EXPLOSIÓN CORAZONES */
-.heart-particle {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-}
+.heart-particle { position: fixed; pointer-events: none; z-index: 9999; font-size: 20px; }
 
 @keyframes explode {
     0% { transform: translate(0,0) scale(1); opacity:1; }
@@ -166,30 +158,24 @@ h1 {
 
 <body>
 
-<!-- PANTALLA DE ENTRADA -->
 <div id="pantalla-verificacion">
-    <div class="titulo-principal">Para Sole ❤️🌻</div>
-    <div class="pista">
-        <b>Pista:</b> Nuestra Fecha Especial (Día, Mes, Año)
-    </div>
+    <div class="titulo-principal">Para Sole ❤️</div>
+    <div style="color: #666; font-size: 14px;">Nuestra Fecha Especial</div>
     <input type="tel" id="fechaInput" class="input-fecha" placeholder="DDMMYYYY" maxlength="8">
-    <button class="btn-verificar" onclick="verificarFecha()">Entrar 💌</button>
-    <p id="error" style="color:red; display:none;">Fecha incorrecta... 🥺</p>
+    <button class="btn-verificar" onclick="verificarFecha()">Abrir mi corazón 🌻</button>
+    <p id="error" style="color:red; display:none; margin-top:10px;">Esa no es la fecha... 🥺</p>
 </div>
 
-<!-- CONTENIDO PRINCIPAL -->
 <div id="contenido-principal">
     <h1>Para Sole, mi monita 🌻❤️</h1>
     
     <div id="textoCarta" class="texto-animado"></div>
 
-    <!-- SECCIÓN DE GATITOS (Reparada) -->
     <div class="contenedor-gatitos">
-        <img class="gif-gatito" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3R6bm9qZWh4YXN3bm9ueXp5eG94bm9ueXp5eG94bm9ueXp5eG94JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/MDJ9IbxxvDUQM/giphy.gif" alt="Gatitos abrazándose">
-        <img class="gif-gatito" src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyOTViYWNueDNtbnJuZGpscmc1bzQ1M3k4cXRtNnlnM2thM3p2d2dsaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/hapksuDhRmbU4/giphy-downsized.gif" alt="Gatitos amor">
+        <img class="gif-gatito" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3R6bm9qZWh4YXN3bm9ueXp5eG94bm9ueXp5eG94bm9ueXp5eG94JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/MDJ9IbxxvDUQM/giphy.gif" alt="Gatito tierno">
     </div>
 
-    <div style="font-family:'Great Vibes'; font-size:40px; color:white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); padding-bottom:100px;">
+    <div style="font-family:'Great Vibes'; font-size:45px; color:white; text-shadow: 2px 2px 8px rgba(0,0,0,0.6); padding-bottom:80px;">
         Eres mi todo. ❤️🌻
     </div>
 </div>
@@ -197,32 +183,30 @@ h1 {
 <div id="monito-caminante">🐒</div>
 
 <script>
-// El script permanece igual, no necesita cambios.
-const mensaje = `Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú; es como si la vida me hubiera dado el regalo más grande del mundo sin que yo hiciera nada para merecerlo.
+const mensaje = `Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú.
 
-<span class="destacar">No tienes idea de lo mucho que me fascina todo de ti.</span>
+No tienes idea de lo mucho que me fascina todo de ti. Amo cada detalle tuyo: tu cabello, tus ojitos o esa sonrisa que me vuelve loco. No pienso soltarte nunca; mi único plan es construir una vida entera contigo.
 
-Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve loco. A veces siento que ni tú misma te das cuenta de lo increíble que eres. No pienso soltarte nunca; mi único plan es construir una vida entera contigo, cumpliendo sueños de la mano y estando ahí para ti, en las buenas y en las malas.
+Ahora mismo te extraño tanto que duele. Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites. No sabes las ganas que tengo de darte un abrazo eterno y de llenarte la frente de besos. Cuento los minutos para volver a tenerte cerca.`;
 
-<span class="destacar">Ahora mismo te extraño tanto que duele.</span>
-
-Me muero por perderme en tus ojos y sentir esa paz que solo tú me transmites. No sabes las ganas que tengo de darte un abrazo eterno, de esos en los que el mundo se detiene, de llenarte la frente de besos mientras te susurro cuánto te amo y de quedarme perdido en el color de tu sonrisa. Cuento los minutos para volver a tenerte cerca.`;
-
-let i = 0;
 function escribirTexto() {
     const cont = document.getElementById("textoCarta");
+    let index = 0;
 
-    if (i < mensaje.length) {
-        if (mensaje[i] === "<") {
-            const cierre = mensaje.indexOf(">", i);
-            cont.innerHTML += mensaje.substring(i, cierre + 1);
-            i = cierre + 1;
-        } else {
-            cont.innerHTML += mensaje[i];
-            i++;
+    // Función interna para procesar el texto letra por letra
+    function procesar() {
+        if (index < mensaje.length) {
+            const span = document.createElement("span");
+            span.className = "letra";
+            span.innerHTML = mensaje[index] === "\n" ? "<br>" : mensaje[index];
+            cont.appendChild(span);
+            
+            index++;
+            // Velocidad de escritura: 50ms (más lento y romántico)
+            setTimeout(procesar, 50);
         }
-        setTimeout(escribirTexto, 25);
     }
+    procesar();
 }
 
 function verificarFecha() {
@@ -248,31 +232,29 @@ function iniciarMonito() {
     function animar() {
         x += vel;
         mono.style.left = x + "px";
-
         if (x > window.innerWidth - 60 || x < -50) {
             vel *= -1;
             mono.style.transform = vel > 0 ? "scaleX(1)" : "scaleX(-1)";
         }
-
         requestAnimationFrame(animar);
     }
     animar();
 }
 
 document.addEventListener("click", function(e){
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 8; i++) {
         const p = document.createElement('div');
         p.classList.add('heart-particle');
-        p.innerHTML = "❤️";
+        p.innerHTML = "🌻"; // Cambié los corazones por girasoles al hacer click
         p.style.left = e.clientX + 'px';
         p.style.top = e.clientY + 'px';
-        const tx = (Math.random() - 0.5) * 300;
-        const ty = (Math.random() - 0.5) * 300;
+        const tx = (Math.random() - 0.5) * 200;
+        const ty = (Math.random() - 0.5) * 200;
         p.style.setProperty('--tx', tx + "px");
         p.style.setProperty('--ty', ty + "px");
-        p.style.animation = "explode 1s forwards";
+        p.style.animation = "explode 0.8s forwards";
         document.body.appendChild(p);
-        setTimeout(() => p.remove(), 1000);
+        setTimeout(() => p.remove(), 800);
     }
 });
 </script>
