@@ -15,11 +15,41 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden;
+}
+
+/* BLOQUEO */
+#bloqueo {
+    text-align: center;
+    max-width: 300px;
+}
+
+h2 {
+    font-family: 'Great Vibes', cursive;
+    color: #ff4d6d;
+}
+
+input {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 10px;
+    width: 100%;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    background: #ff6b81;
+    color: white;
+    cursor: pointer;
+    width: 100%;
 }
 
 /* SOBRE */
 .sobre {
+    display: none;
     width: 300px;
     height: 200px;
     background: #ff6b81;
@@ -52,7 +82,6 @@ body {
     left: 5%;
     border-radius: 10px;
     padding: 15px;
-    box-sizing: border-box;
     overflow-y: auto;
     transform: translateY(100%);
     transition: 1s;
@@ -62,20 +91,13 @@ body {
     transform: translateY(0);
 }
 
-/* TEXTO */
 h1 {
     font-family: 'Great Vibes', cursive;
     color: #ff4d6d;
     text-align: center;
 }
 
-p {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.5;
-}
-
-/* CORAZONES CSS (sin emojis) */
+/* CORAZONES */
 .corazon {
     position: absolute;
     width: 15px;
@@ -95,19 +117,19 @@ p {
     border-radius: 50%;
 }
 
-.corazon::before {
-    top: -7px;
-    left: 0;
-}
+.corazon::before { top: -7px; }
+.corazon::after { left: -7px; }
 
-.corazon::after {
-    left: -7px;
-    top: 0;
+/* GIRASOLES */
+.girasol {
+    position: absolute;
+    font-size: 20px;
+    animation: explotar 1s ease-out forwards;
 }
 
 @keyframes explotar {
     to {
-        transform: translate(var(--x), var(--y)) rotate(45deg);
+        transform: translate(var(--x), var(--y));
         opacity: 0;
     }
 }
@@ -116,20 +138,34 @@ p {
 
 <body onclick="explosion(event)">
 
+<!-- BLOQUEO -->
+<div id="bloqueo">
+    <h2>Hay algo esperándote... ❤️</h2>
+    <p>
+        Pista: una fecha importante para nosotros 🌻<br>
+        (día, mes y año juntos)
+    </p>
+
+    <input type="password" id="clave" placeholder="DDMMYYYY">
+    <button onclick="verificar()">Descubrir 💌</button>
+
+    <p id="error" style="color:red;"></p>
+</div>
+
+<!-- SOBRE -->
 <div class="sobre" onclick="abrir(event)" id="sobre">
     <div class="tapa"></div>
 
     <div class="carta">
-        <h1>Para Sole, mi monita ❤️</h1>
+        <h1>Para Sole, mi monita 🌻❤️</h1>
         <p>
-Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve. 
-A veces miro a mi alrededor y me parece increíble haberme cruzado con alguien como tú; es como si la vida me hubiera dado el regalo más grande del mundo sin que yo hiciera nada para merecerlo.<br><br>
+Cielo, estaba aquí sentado pensando en nosotros y, de verdad, sigo sin asimilar la suerte que tuve...<br><br>
 
-No tienes idea de lo mucho que me fascina todo de ti. Amo cada detalle tuyo: tu cabello, tus ojitos verdes o esa sonrisa que me vuelve loco.<br><br>
+No tienes idea de lo mucho que me fascina todo de ti...<br><br>
 
-Voy a estar ahí para recordarte lo hermosa que eres, porque para mí eres perfecta tal cual eres.<br><br>
+Voy a estar ahí para recordarte lo hermosa que eres...<br><br>
 
-No pienso soltarte nunca; mi único plan es construir una vida entera contigo.<br><br>
+No pienso soltarte nunca...<br><br>
 
 <b>Eres mi todo. ❤️</b>
         </p>
@@ -137,6 +173,19 @@ No pienso soltarte nunca; mi único plan es construir una vida entera contigo.<b
 </div>
 
 <script>
+const claveCorrecta = "13032026";
+
+function verificar() {
+    const input = document.getElementById("clave").value;
+
+    if (input === claveCorrecta) {
+        document.getElementById("bloqueo").style.display = "none";
+        document.getElementById("sobre").style.display = "block";
+    } else {
+        document.getElementById("error").innerText = "Hmm... esa no es 😢";
+    }
+}
+
 function abrir(e) {
     e.stopPropagation();
     document.getElementById("sobre").classList.toggle("abierto");
@@ -144,9 +193,10 @@ function abrir(e) {
 
 function explosion(e) {
     for (let i = 0; i < 20; i++) {
+
+        // corazones
         const c = document.createElement("div");
         c.classList.add("corazon");
-
         c.style.left = e.clientX + "px";
         c.style.top = e.clientY + "px";
 
@@ -154,8 +204,20 @@ function explosion(e) {
         c.style.setProperty('--y', (Math.random()*200-100) + 'px');
 
         document.body.appendChild(c);
-
         setTimeout(() => c.remove(), 1000);
+
+        // girasoles
+        const g = document.createElement("div");
+        g.classList.add("girasol");
+        g.innerText = "🌻";
+        g.style.left = e.clientX + "px";
+        g.style.top = e.clientY + "px";
+
+        g.style.setProperty('--x', (Math.random()*200-100) + 'px');
+        g.style.setProperty('--y', (Math.random()*200-100) + 'px');
+
+        document.body.appendChild(g);
+        setTimeout(() => g.remove(), 1000);
     }
 }
 </script>
